@@ -1,12 +1,16 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
+const fetch = require('node-fetch');
 
-const token = 'NjA0NDUwOTI1MjkzMzM4NjMx.XTuJSA.qhQDWJ3DUfY-gvRAWcDsGlVFqDs';
+const token = 'NjA0NDUwOTI1MjkzMzM4NjMx.XUDNdQ.2noPEoUAyovpNXEnidYPxq8hJZ0';
+
+const api = "https://api.poe.watch/itemdata";
 
 const PREFIX = '!';
 
 bot.on('ready', () => {
     console.log('This bot is online!');
+    
 });
 
 bot.on('message', message=> {
@@ -19,8 +23,8 @@ bot.on('message', message=> {
         case "website":
             message.channel.sendMessage("www.github.com/daryusl");
             break;
-        case "info":
-            
+        case "pc":
+            fetch(api).then(res => res.text()).then(body => console.log(body));
     }
 })
 
