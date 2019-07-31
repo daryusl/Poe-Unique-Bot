@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const fetch = require('node-fetch');
 
-const token = 'NjA0NDUwOTI1MjkzMzM4NjMx.XUDNdQ.2noPEoUAyovpNXEnidYPxq8hJZ0';
+const token = '';
 
 const api = "https://api.poe.watch/itemdata";
 
@@ -24,8 +24,16 @@ bot.on('message', message=> {
             message.channel.sendMessage("www.github.com/daryusl");
             break;
         case "pc":
-            fetch(api).then(res => res.text()).then(body => console.log(body));
+            fetch(api).then(r => {
+                let body = r.body;
+                let name = args[1];
+                if(!name) return message.channel.send("Suppy a name!");
+                if(!isNaN(name)) return message.channel.send("Suppy a valid name!");
+
+                let entry = body.find(post => post.name === name);
+                console.log(body);
+        });
     }
-})
+});
 
 bot.login(token);
